@@ -97,7 +97,7 @@ export function Step3ReportPreview({ data, onChange, onRestart }: Props) {
     URL.revokeObjectURL(url);
   };
 
-  const handleEmail = () => {
+  const handleEmail = (useGmail: boolean) => {
     // Trigger downloads so user has the files ready to attach
     handleDownloadPDF();
     setTimeout(() => {
@@ -108,11 +108,19 @@ export function Step3ReportPreview({ data, onChange, onRestart }: Props) {
 
     const subject = `Stationery Indent – ${data.zone} – ${data.date}`;
     
-    // Vendor is To, Sender is CC just to keep a copy
-    const mailtoLink = `mailto:${data.vendorEmail || ''}?cc=${data.senderEmail || ''}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-    
     setTimeout(() => {
-      window.location.href = mailtoLink;
+      if (useGmail) {
+        const to = encodeURIComponent(data.vendorEmail || '');
+        const cc = encodeURIComponent(data.senderEmail || '');
+        const su = encodeURIComponent(subject);
+        const body = encodeURIComponent(emailBody);
+        const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&cc=${cc}&su=${su}&body=${body}`;
+        window.open(gmailLink, '_blank');
+      } else {
+        // Vendor is To, Sender is CC just to keep a copy
+        const mailtoLink = `mailto:${data.vendorEmail || ''}?cc=${data.senderEmail || ''}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = mailtoLink;
+      }
     }, 300);
   };
 
@@ -144,11 +152,18 @@ export function Step3ReportPreview({ data, onChange, onRestart }: Props) {
             Excel (CSV)
           </button>
           <button
-            onClick={handleEmail}
+            onClick={() => handleEmail(true)}
             className="flex items-center gap-2 bg-[#F7C948] hover:bg-yellow-500 text-gray-900 font-medium py-2 px-4 rounded-md transition-colors"
           >
             <Mail className="w-4 h-4" />
-            Draft Email
+            Draft in Gmail
+          </button>
+          <button
+            onClick={() => handleEmail(false)}
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            Draft in Local App
           </button>
           <button
             onClick={() => setShowEmailConfig(!showEmailConfig)}
