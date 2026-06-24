@@ -12,7 +12,7 @@ const initialData: IndentData = {
   date: new Date().toISOString().split('T')[0],
   quantities: {},
   remarks: {},
-  vendorEmail: 'vendor@mayfairtravels.com',
+  vendorEmail: 'printpointkatariya@gmail.com',
   senderEmail: 'admin@amul.coop',
 };
 
