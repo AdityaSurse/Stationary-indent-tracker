@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Pune Zone Stationery Indent Tracker
 
-# Run and deploy your AI Studio app
+A React application for tracking and generating stationery indents for the Pune Zone.
 
-This contains everything you need to run your app locally.
+## Features
+- Zone Selection
+- Quantity Entry
+- PDF Report Generation
+- Excel (CSV) Report Generation
+- Draft Email Integration
 
-View your app in AI Studio: https://ai.studio/apps/9891e372-7906-4872-9fb2-e5df86b1f4f5
+## Development
 
-## Run Locally
+### Prerequisites
+- Node.js
 
-**Prerequisites:**  Node.js
-
+### Setup
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   npm install
+   ```
+
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Build
+
+To create a production build:
+```bash
+npm run build
+```
